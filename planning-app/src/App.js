@@ -1,12 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
 
+import React, { useEffect } from "react";
+
 import Navbar from "./components/header/Navbar";
+
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <React.Fragment>
         <Navbar />
-      </div>
+      </React.Fragment>
     </BrowserRouter>
   );
 }

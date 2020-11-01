@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const SignInLink = () => {
   return (
-    <ul className="right">
+    <ul className="right hide-on-med-and-down">
       <li>
         <NavLink to="/">New task</NavLink>
       </li>
@@ -10,8 +10,9 @@ const SignInLink = () => {
         <NavLink to="/">Log out</NavLink>
       </li>
       <li>
-        <NavLink to="/" className="btn btn-floating pink lighten-1">
-          Initials
+        {/* Initials of full name we will see*/}
+        <NavLink to="/" className="btn btn-floating lighten-1">
+          ML
         </NavLink>
       </li>
     </ul>
