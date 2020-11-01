@@ -5,11 +5,11 @@ const Footer = () => {
     <div>
       Icons made by
       <a href="https://creativemarket.com/eucalyp" title="Eucalyp">
-        Eucalyp
+        &nbsp; Eucalyp &nbsp;
       </a>
       from
       <a href="https://www.flaticon.com/" title="Flaticon">
-        www.flaticon.com
+        &nbsp; www.flaticon.com
       </a>
     </div>
   );

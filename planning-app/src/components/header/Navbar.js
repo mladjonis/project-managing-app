@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import SignInLink from "./SignInLink";
 import SignOutLink from "./SignOutLink";
-import M from "materialize-css";
 import Mobile from "./Mobile";
 
 const Navbar = () => {
-  useEffect(() => {
-    M.AutoInit();
-  });
   return (
     <React.Fragment>
       <nav className="nav-wrapper light-blue darken-3">
