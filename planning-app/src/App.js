@@ -6,6 +6,7 @@ import M from "materialize-css";
 import Navbar from "./components/header/Navbar";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
+import TaskDetails from "./components/tasks/TaskDetails";
 
 function App() {
   useEffect(() => {
@@ -16,7 +17,8 @@ function App() {
       <React.Fragment>
         <Navbar />
         <Switch>
-          <Route path="/" component={Dashboard} />
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/task/:id" component={TaskDetails} />
         </Switch>
         {/* <Footer /> */}
       </React.Fragment>
