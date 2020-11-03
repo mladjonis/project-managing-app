@@ -1,8 +1,24 @@
-import { ADD_TASK } from "./types";
+import { ADD_TASK, ADD_TASK_ERROR } from "./types";
 
 export const createTask = (task) => {
-  return async (dispatch, getState) => {
+  //{} destructuring thunk extra arguments
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     //api call
-    dispatch({ type: ADD_TASK, payload: task });
+    const fs = getFirestore();
+    fs.collection("tasks")
+      .add({
+        ...task,
+        authorFirstName: "Mladjonis",
+        authorLastName: "Mladjonis",
+        authodId: 9999,
+        createdAt: new Date(),
+      })
+      .then(() => {
+        dispatch({ type: ADD_TASK, payload: task });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: ADD_TASK_ERROR, payload: err });
+      });
   };
 };

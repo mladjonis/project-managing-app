@@ -1,4 +1,4 @@
-import { ADD_TASK } from "../actions/types";
+import { ADD_TASK, ADD_TASK_ERROR } from "../actions/types";
 
 const initState = {
   tasks: [
@@ -18,7 +18,10 @@ const initState = {
 const taskReducer = (state = initState, action) => {
   switch (action.type) {
     case ADD_TASK:
-      console.log(state, action);
+      console.log("ADD_TASK", action.payload);
+      return state;
+    case ADD_TASK_ERROR:
+      console.log("ADD_TASK_ERROR", action.payload);
       return state;
     default:
       return state;

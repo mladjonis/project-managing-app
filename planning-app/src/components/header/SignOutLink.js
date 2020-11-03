@@ -4,10 +4,10 @@ const SignOutLink = () => {
   return (
     <ul className="right hide-on-med-and-down">
       <li>
-        <NavLink to="/signup">Signup</NavLink>
+        <NavLink to="/">Signup</NavLink>
       </li>
       <li>
-        <NavLink to="/signin">Login</NavLink>
+        <NavLink to="/">Login</NavLink>
       </li>
     </ul>
   );

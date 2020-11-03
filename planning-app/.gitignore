@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#firebaseConfig for now is being ignored for safety reasons
+/src/config/firebaseConfig.js
+
 # debug.log
 debug.log
 
