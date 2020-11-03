@@ -11,6 +11,16 @@ const Footer = () => {
       <a href="https://www.flaticon.com/" title="Flaticon">
         &nbsp; www.flaticon.com
       </a>
+      <span>
+        Photo by
+        <a href="https://unsplash.com/@jazminantoinette?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+          Jazmin Quaynor
+        </a>
+        on
+        <a href="https://unsplash.com/t/business-work?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+          Unsplash
+        </a>
+      </span>
     </div>
   );
 };

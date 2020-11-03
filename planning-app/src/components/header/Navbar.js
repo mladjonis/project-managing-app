@@ -10,7 +10,7 @@ const Navbar = () => {
       <nav className="nav-wrapper light-blue darken-3">
         <div className="container">
           <Link to="/" className="brand-logo ">
-            Plan app
+            Atila
           </Link>
           <Link to="/" data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>

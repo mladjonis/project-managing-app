@@ -7,6 +7,11 @@ class SignUp extends React.Component {
     firstName: "",
     lastName: "",
   };
+
+  componentDidMount() {
+    document.title = "Atila managing app - Sign up";
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -22,7 +27,7 @@ class SignUp extends React.Component {
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Sign In</h5>
+          <h5 className="grey-text text-darken-3">Sign Up</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" onChange={this.handleChange} />

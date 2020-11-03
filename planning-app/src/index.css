@@ -4,6 +4,24 @@
   box-sizing: border-box;
 }
 
+body {
+  background: url(./images/jazmin-quaynor-nbBLwsBeh64-unsplash2.jpg) no-repeat;
+  height: auto;
+  width: 100%;
+  /* background-size: 100%;
+  background-position: bottom; */
+}
+
+form {
+  padding: 1.2rem;
+  margin-top: 3rem;
+}
+
+form button,
+form h5 {
+  margin: 1.2rem 0;
+}
+
 html {
   /*font-size: 62.5% i onda koristiti rem dalje*/
 }

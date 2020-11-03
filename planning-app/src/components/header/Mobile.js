@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const Mobile = () => {
   return (
-    <ul className="sidenav" id="mobile-demo">
+    <ul className="sidenav sidenav-close" id="mobile-demo">
       <li>
-        <NavLink to="/">New task</NavLink>
+        <NavLink to="/create">New task</NavLink>
       </li>
       <li>
         <NavLink to="/">Log out</NavLink>
@@ -16,10 +16,10 @@ const Mobile = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/">Signup</NavLink>
+        <NavLink to="/signup">Signup</NavLink>
       </li>
       <li>
-        <NavLink to="/">Login</NavLink>
+        <NavLink to="/signin">Login</NavLink>
       </li>
     </ul>
   );

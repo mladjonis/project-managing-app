@@ -16,6 +16,7 @@ class SignIn extends React.Component {
     console.log(e);
   };
   render() {
+    document.title = "Atila managing app - Sign in";
     console.log(this.state);
     return (
       <div className="container">
