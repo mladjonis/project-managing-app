@@ -12,20 +12,24 @@ import {
   reduxFirestore,
 } from "redux-firestore";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-import { firebaseInit, firebaseConfig } from "./config/firebaseConfig";
-// import firebase from "firebase/app";
+import {
+  // firebaseInit,
+  firebaseConfig,
+  // firestore,
+} from "./config/firebaseConfig";
+import firebase from "firebase/app";
 //import reportWebVitals from "./reportWebVitals";
 
 const store = createStore(
   reducers,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirestore })),
-    reduxFirestore(firebaseConfig)
+    reduxFirestore(firebase, firebaseConfig)
   )
 );
 
 const rrfProps = {
-  firebaseInit,
+  firebase,
   config: firebaseConfig,
   dispatch: store.dispatch,
   createFirestoreInstance, // <- needed if using firestore

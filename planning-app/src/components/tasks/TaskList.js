@@ -3,10 +3,15 @@ import TaskSummary from "./TaskSummary";
 
 const TaskList = ({ tasks }) => {
   console.log(tasks);
-  const renderTasks = tasks.map((task) => {
-    return <TaskSummary key={task.id} task={task} />;
-  });
-  return <div className="task-list section">{tasks && renderTasks}</div>;
+
+  return (
+    <div className="task-list section">
+      {tasks &&
+        tasks.map((task) => {
+          return <TaskSummary key={task.id} task={task} />;
+        })}
+    </div>
+  );
 };
 
 export default TaskList;
