@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createTask } from "../../actions";
 
 class CreateTask extends React.Component {
   state = {
@@ -13,6 +15,8 @@ class CreateTask extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     console.log(e);
+    console.log(this.props);
+    this.props.createTask(this.state);
   };
   render() {
     document.title = "Atila managing app - Create task";
@@ -42,4 +46,10 @@ class CreateTask extends React.Component {
   }
 }
 
-export default CreateTask;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createTask: (task) => dispatch(createTask(task)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CreateTask);
