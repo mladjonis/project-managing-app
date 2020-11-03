@@ -9,8 +9,8 @@ const Navbar = () => {
     <React.Fragment>
       <nav className="nav-wrapper light-blue darken-3">
         <div className="container">
-          <Link to="/" className="brand-logo">
-            Planning app
+          <Link to="/" className="brand-logo ">
+            Plan app
           </Link>
           <Link to="/" data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>

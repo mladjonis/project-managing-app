@@ -7,6 +7,8 @@ import Navbar from "./components/header/Navbar";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import TaskDetails from "./components/tasks/TaskDetails";
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
 
 function App() {
   useEffect(() => {
@@ -19,6 +21,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/task/:id" component={TaskDetails} />
+          <Route path="/signin/" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
         </Switch>
         {/* <Footer /> */}
       </React.Fragment>
