@@ -3,23 +3,31 @@ import { NavLink } from "react-router-dom";
 
 const Mobile = () => {
   return (
-    <ul className="sidenav sidenav-close" id="mobile-demo">
+    <ul className="sidenav" id="mobile-demo">
       <li>
-        <NavLink to="/create">New task</NavLink>
+        <NavLink to="/create" className="sidenav-close">
+          New task
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/">Log out</NavLink>
+        <NavLink to="/" className="sidenav-close">
+          Log out
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/" className="btn lighten-1">
+        <NavLink to="/" className="btn lighten-1 sidenav-close">
           Name Lastname
         </NavLink>
       </li>
       <li>
-        <NavLink to="/signup">Signup</NavLink>
+        <NavLink to="/signup" className="sidenav-close">
+          Signup
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/signin">Login</NavLink>
+        <NavLink to="/signin" className="sidenav-close">
+          Login
+        </NavLink>
       </li>
     </ul>
   );

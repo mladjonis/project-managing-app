@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 const Dashboard = (props) => {
   const { tasks } = props;
-  console.log(props);
+  //console.log(props);
   return (
     <div className="dashboard container">
       <div className="row">
