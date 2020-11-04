@@ -1,4 +1,9 @@
-import { ADD_TASK, ADD_TASK_ERROR } from "./types";
+import {
+  ADD_TASK,
+  ADD_TASK_ERROR,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_ERROR,
+} from "./types";
 
 export const createTask = (task) => {
   //{} destructuring thunk extra arguments
@@ -19,6 +24,22 @@ export const createTask = (task) => {
       .catch((err) => {
         console.log(err);
         dispatch({ type: ADD_TASK_ERROR, payload: err });
+      });
+  };
+};
+
+export const signIn = (cred) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(cred.email, cred.password)
+      .then(() => {
+        dispatch({ type: SIGN_IN_SUCCESS });
+      })
+      .catch((err) => {
+        dispatch({ type: SIGN_IN_ERROR, payload: err });
       });
   };
 };

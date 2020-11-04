@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SignInLink from "./SignInLink";
 import SignOutLink from "./SignOutLink";
 import Mobile from "./Mobile";
+import { connect } from "react-redux";
 
 const Navbar = () => {
   return (
@@ -24,4 +25,10 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    firebase: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);
