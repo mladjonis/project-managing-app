@@ -5,7 +5,9 @@ import SignOutLink from "./SignOutLink";
 import Mobile from "./Mobile";
 import { connect } from "react-redux";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { firebaseAuth } = props;
+  const loggedInLinks = firebaseAuth.uid ? <SignInLink /> : <SignOutLink />;
   return (
     <React.Fragment>
       <nav className="nav-wrapper light-blue darken-3">
@@ -16,18 +18,17 @@ const Navbar = () => {
           <Link to="/" data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </Link>
-          <SignInLink />
-          <SignOutLink />
+          {loggedInLinks}
         </div>
       </nav>
-      <Mobile />
+      <Mobile isLoggedIn={firebaseAuth.uid} />
     </React.Fragment>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    firebase: state.firebase.auth,
+    firebaseAuth: state.firebase.auth,
   };
 };
 

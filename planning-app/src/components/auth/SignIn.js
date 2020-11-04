@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { signIn } from "../../actions";
 
 class SignIn extends React.Component {
   state = {
@@ -13,11 +15,14 @@ class SignIn extends React.Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+    //console.log(e);
+    console.log(this.props);
+    this.props.signIn(this.state);
   };
   render() {
     document.title = "Atila managing app - Sign in";
-    console.log(this.state);
+    //console.log(this.state);
+    const { authError } = this.props;
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} className="white">
@@ -31,7 +36,10 @@ class SignIn extends React.Component {
             <input type="password" id="password" onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Submit</button>
+            <button className="btn pink lighten-1 z-depth-0">SignIn in</button>
+            <div className="red-text center">
+              {authError ? <p>{authError}</p> : null}
+            </div>
           </div>
         </form>
       </div>
@@ -39,4 +47,17 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    authError: state.auth.authError,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (cred) => dispatch(signIn(cred)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -3,7 +3,10 @@ import {
   ADD_TASK_ERROR,
   SIGN_IN_SUCCESS,
   SIGN_IN_ERROR,
+  SIGNOUT_ERROR,
+  SIGNOUT_SUCCESS,
 } from "./types";
+import firebaseConfig from "../config/firebaseConfig";
 
 export const createTask = (task) => {
   //{} destructuring thunk extra arguments
@@ -30,6 +33,7 @@ export const createTask = (task) => {
 
 export const signIn = (cred) => {
   return (dispatch, getState, { getFirebase }) => {
+    //console.log(getFirebase);
     const firebase = getFirebase();
 
     firebase
@@ -39,7 +43,24 @@ export const signIn = (cred) => {
         dispatch({ type: SIGN_IN_SUCCESS });
       })
       .catch((err) => {
-        dispatch({ type: SIGN_IN_ERROR, payload: err });
+        //console.log(err);
+        dispatch({ type: SIGN_IN_ERROR, payload: err.message });
+      });
+  };
+};
+
+export const signOut = () => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({ type: SIGNOUT_SUCCESS });
+      })
+      .catch((err) => {
+        dispatch({ type: SIGNOUT_ERROR, payload: err.message });
       });
   };
 };
