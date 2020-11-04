@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signIn } from "../../actions";
 
@@ -23,6 +24,11 @@ class SignIn extends React.Component {
     document.title = "Atila managing app - Sign in";
     //console.log(this.state);
     const { authError } = this.props;
+    const { auth } = this.props;
+
+    if (auth.uid) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} className="white">
@@ -51,6 +57,7 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     authError: state.auth.authError,
+    auth: state.firebase.auth,
   };
 };
 

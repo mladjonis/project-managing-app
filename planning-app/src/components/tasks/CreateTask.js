@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { createTask } from "../../actions";
 
 class CreateTask extends React.Component {
@@ -21,6 +22,10 @@ class CreateTask extends React.Component {
   render() {
     document.title = "Atila managing app - Create task";
     //console.log(this.state);
+    const { auth } = this.props;
+    if (!auth.uid) {
+      return <Redirect to="signin" />;
+    }
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} className="white">
@@ -46,10 +51,16 @@ class CreateTask extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     createTask: (task) => dispatch(createTask(task)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(CreateTask);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);
