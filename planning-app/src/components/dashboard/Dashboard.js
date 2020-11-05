@@ -7,7 +7,7 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 const Dashboard = (props) => {
-  const { tasks, auth } = props;
+  const { tasks, auth, notifications } = props;
   //console.log(props);
 
   if (!auth.uid) {
@@ -20,7 +20,7 @@ const Dashboard = (props) => {
           <TaskList tasks={tasks} />
         </div>
         <div className="col s12 m5 offset-m1">
-          <Notifications />
+          <Notifications notifications={notifications} />
         </div>
       </div>
     </div>
@@ -32,10 +32,14 @@ const mapStateToProps = (state) => {
   return {
     tasks: state.firestore.ordered.tasks,
     auth: state.firebase.auth,
+    notifications: state.firestore.ordered.notifications,
   };
 };
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "tasks" }])
+  firestoreConnect([
+    { collection: "tasks", orderBy: ["createdAt", "desc"] },
+    { collection: "notifications", limit: 5, orderBy: ["time", "desc"] },
+  ])
 )(Dashboard);

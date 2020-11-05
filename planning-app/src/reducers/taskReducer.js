@@ -18,10 +18,10 @@ const initState = {
 const taskReducer = (state = initState, action) => {
   switch (action.type) {
     case ADD_TASK:
-      console.log("ADD_TASK", action.payload);
+      //console.log("ADD_TASK", action.payload);
       return state;
     case ADD_TASK_ERROR:
-      console.log("ADD_TASK_ERROR", action.payload);
+      //console.log("ADD_TASK_ERROR", action.payload);
       return state;
     default:
       return state;

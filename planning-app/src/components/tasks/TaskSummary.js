@@ -1,8 +1,6 @@
 import React from "react";
 
 const TaskSummary = ({ task }) => {
-  // console.log(task);
-  console.log(task);
   const date = new Date(task.createdAt.seconds * 1000);
   const dateString = date.toLocaleString("en-us", {
     month: "long",
