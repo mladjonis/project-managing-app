@@ -18,6 +18,7 @@ class CreateTask extends React.Component {
     console.log(e);
     console.log(this.props);
     this.props.createTask(this.state);
+    this.props.history.push("/");
   };
   render() {
     document.title = "Atila managing app - Create task";

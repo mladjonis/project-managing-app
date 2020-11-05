@@ -15,12 +15,14 @@ export const createTask = (task) => {
   return (dispatch, getState, { getFirestore }) => {
     //api call
     const fs = getFirestore();
+    const userProfile = getState().firebase.profile;
+    const uid = getState().firebase.auth.uid;
     fs.collection("tasks")
       .add({
         ...task,
-        authorFirstName: "Mladjonis",
-        authorLastName: "Mladjonis",
-        authodId: 9999,
+        authorFirstName: userProfile.firstName,
+        authorLastName: userProfile.lastName,
+        authodId: uid,
         createdAt: new Date(),
       })
       .then(() => {
