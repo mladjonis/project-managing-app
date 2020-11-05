@@ -37,10 +37,14 @@ const store = createStore(
     reduxFirestore(firebase, firebaseConfig)
   )
 );
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+};
 
 const rrfProps = {
   firebase,
-  config: firebaseConfig,
+  config: { ...firebaseConfig, ...rrfConfig },
   dispatch: store.dispatch,
   createFirestoreInstance, // <- needed if using firestore
 };

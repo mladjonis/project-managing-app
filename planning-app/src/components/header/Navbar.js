@@ -6,8 +6,12 @@ import Mobile from "./Mobile";
 import { connect } from "react-redux";
 
 const Navbar = (props) => {
-  const { firebaseAuth } = props;
-  const loggedInLinks = firebaseAuth.uid ? <SignInLink /> : <SignOutLink />;
+  const { firebaseAuth, profile } = props;
+  const loggedInLinks = firebaseAuth.uid ? (
+    <SignInLink profile={profile} />
+  ) : (
+    <SignOutLink />
+  );
   return (
     <React.Fragment>
       <nav className="nav-wrapper light-blue darken-3">
@@ -27,8 +31,10 @@ const Navbar = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     firebaseAuth: state.firebase.auth,
+    profile: state.firebase.profile,
   };
 };
 
