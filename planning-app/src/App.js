@@ -10,6 +10,8 @@ import TaskDetails from "./components/tasks/TaskDetails";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import CreateTask from "./components/tasks/CreateTask";
+import GuardedRoute from "./route-guard/GuardedRoute";
+import ChatRoom from "./components/chat-room/ChatRoom";
 
 function App() {
   useEffect(() => {
@@ -20,7 +22,8 @@ function App() {
       <React.Fragment>
         <Navbar />
         <Switch>
-          <Route path="/" exact component={Dashboard} />
+          {/* <GuardedRoute exact path="/" component={Dashboard} /> */}
+          <Route path="/" exact component={ChatRoom} /> {/*Dashboard */}
           <Route path="/task/:id" component={TaskDetails} />
           <Route path="/signin/" component={SignIn} />
           <Route path="/signup" component={SignUp} />

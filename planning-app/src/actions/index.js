@@ -7,6 +7,7 @@ import {
   SIGNOUT_SUCCESS,
   SIGN_UP_ERROR,
   SIGN_UP_SUCCESS,
+  SEND_MESSAGE,
 } from "./types";
 import firebaseConfig from "../config/firebaseConfig";
 
@@ -93,5 +94,43 @@ export const signUp = (user) => {
       .catch((err) => {
         dispatch({ type: SIGN_UP_ERROR, payload: err.message });
       });
+  };
+};
+
+export const sendMessage = (message) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+    console.log(getState());
+
+    //const userProfile = getState().firebase.profile;
+    const userId = getState().firebase.auth.uid;
+
+    firestore
+      .collection("messages")
+      .add({
+        text: message.messageText,
+        uid: userId,
+        createdAt: new Date(),
+      })
+      .then((resp) => {
+        console.log(resp);
+        //dispatch({ type: SEND_MESSAGE, payload: message});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const getMessages = () => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    const messages = firestore
+      .collection("messages")
+      .orderBy("createdAt")
+      .limit(25);
+
+    dispatch({ type: "FETCH_MESSAGES", payload: messages });
   };
 };
