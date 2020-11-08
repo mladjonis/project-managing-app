@@ -101,9 +101,9 @@ export const sendMessage = (message) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
-    console.log(getState());
+    //console.log(getState());
 
-    //const userProfile = getState().firebase.profile;
+    const userProfile = getState().firebase.profile;
     const userId = getState().firebase.auth.uid;
 
     firestore
@@ -111,6 +111,7 @@ export const sendMessage = (message) => {
       .add({
         text: message.messageText,
         uid: userId,
+        photoURL: userProfile.photoURL,
         createdAt: new Date(),
       })
       .then((resp) => {

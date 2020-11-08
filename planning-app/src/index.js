@@ -30,9 +30,12 @@ function AuthIsLoaded({ children }) {
 }
 //import reportWebVitals from "./reportWebVitals";
 
+//remove on building
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   reducers,
-  compose(
+  composeEnhancers(
     applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
     reduxFirestore(firebase, firebaseConfig)
   )
