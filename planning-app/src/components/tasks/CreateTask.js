@@ -25,7 +25,7 @@ class CreateTask extends React.Component {
     //console.log(this.state);
     const { auth } = this.props;
     if (!auth.uid) {
-      return <Redirect to="signin" />;
+      return <Redirect to="/signin" />;
     }
     return (
       <div className="container">

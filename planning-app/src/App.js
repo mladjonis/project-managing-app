@@ -23,13 +23,14 @@ function App() {
         <Navbar />
         <Switch>
           {/* <GuardedRoute exact path="/" component={Dashboard} /> */}
-          <Route path="/" exact component={ChatRoom} /> {/*Dashboard */}
+          <Route path="/" exact component={Dashboard} /> {/*Dashboard */}
           <Route path="/task/:id" component={TaskDetails} />
           <Route path="/signin/" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/create" component={CreateTask} />
+          <Route path="/chat" component={ChatRoom} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </React.Fragment>
     </BrowserRouter>
   );

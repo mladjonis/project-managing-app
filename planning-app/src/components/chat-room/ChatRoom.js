@@ -4,18 +4,34 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import ChatMessage from "./ChatMessage";
 import { sendMessage } from "../../actions";
+import { Redirect } from "react-router-dom";
 
 class ChatRoom extends React.Component {
   state = {
     messageText: "",
   };
-  ref = createRef();
+  constructor(props) {
+    super(props);
+    this.ref = createRef();
+  }
 
   onMessageInputChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
+
+  scrollToBottom = () => {
+    this.ref.scrollIntoView({ behavior: "smooth" });
+  };
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
 
   sendMessage = (e) => {
     e.preventDefault();
@@ -27,17 +43,20 @@ class ChatRoom extends React.Component {
     this.setState({
       messageText: "",
     });
-    this.ref.current.scrollIntoView({ behaviour: "smooth" });
+    //this.ref.scrollIntoView({ behaviour: "smooth" });
   };
   render() {
     const { auth, messages } = this.props;
     // console.log("chatroom props", this.props);
     // console.log("state", this.state);
+    if (!auth.uid) {
+      return <Redirect to="/" />;
+    }
     return (
       <React.Fragment>
         <section>
           <main>
-            <div ref={this.ref}>
+            <div>
               {messages &&
                 messages.map((message) => {
                   return (
@@ -49,6 +68,11 @@ class ChatRoom extends React.Component {
                   );
                 })}
             </div>
+            <div
+              ref={(el) => {
+                this.ref = el;
+              }}
+            ></div>
           </main>
           <form onSubmit={this.sendMessage}>
             <input
@@ -83,5 +107,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([{ collection: "messages", orderBy: ["createdAt", "desc"] }])
+  firestoreConnect([{ collection: "messages", orderBy: ["createdAt", "asc"] }])
 )(ChatRoom);
