@@ -12,6 +12,7 @@ import SignUp from "./components/auth/SignUp";
 import CreateTask from "./components/tasks/CreateTask";
 import GuardedRoute from "./route-guard/GuardedRoute";
 import ChatRoom from "./components/chat-room/ChatRoom";
+import UserProfile from "./components/profile/UserProfile";
 
 function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/signup" component={SignUp} />
           <Route path="/create" component={CreateTask} />
           <Route path="/chat" component={ChatRoom} />
+          <Route path="/profile/:id" component={UserProfile} />
         </Switch>
         <Footer />
       </React.Fragment>

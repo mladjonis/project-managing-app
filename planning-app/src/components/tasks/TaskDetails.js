@@ -3,10 +3,11 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
+import moment from "moment";
 
 const TaskDetails = (props) => {
   const { selectedTask } = props;
-  const { auth } = this.props;
+  const { auth } = props;
   if (!auth.uid) {
     return <Redirect to="signin" />;
   }
@@ -25,9 +26,9 @@ const TaskDetails = (props) => {
               Posted by {props.selectedTask.authorFirstName}{" "}
               {props.authorLastName}
             </div>
-            {/*podesiti datum ne radi zbog datuma greksa je :
-             Uncaught Error: Objects are not valid as a React child (found: object with keys {seconds, nanoseconds}). If you meant to render a collection of children, use an array instead.*/}
-            {/* <div>{props.selectedTask.createdAt}</div> */}
+            <div className="note-date grey-text">
+              {moment(selectedTask.createdAt.toDate()).fromNow()}
+            </div>
           </div>
         </div>
       </div>
@@ -42,9 +43,9 @@ const TaskDetails = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+  // console.log(state);
   const id = ownProps.match.params.id;
-  console.log(ownProps);
+  // console.log(ownProps);
   const tasks = state.firestore.data.tasks;
   const task = tasks ? tasks[id] : null;
   return {

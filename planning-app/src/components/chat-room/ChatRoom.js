@@ -56,6 +56,7 @@ class ChatRoom extends React.Component {
       <React.Fragment>
         <section>
           <main>
+            <h3 className="heading-chat-room">Chat room</h3>
             <div>
               {messages &&
                 messages.map((message) => {
@@ -64,6 +65,7 @@ class ChatRoom extends React.Component {
                       key={message.id}
                       message={message}
                       uid={auth.uid}
+                      profile={this.props.profile}
                     />
                   );
                 })}

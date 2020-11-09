@@ -8,7 +8,7 @@ import { firestoreConnect } from "react-redux-firebase";
 
 const Dashboard = (props) => {
   const { tasks, auth, notifications } = props;
-  console.log(props);
+  //console.log(props);
   //console.log(props);
 
   if (!auth.uid) {
@@ -20,7 +20,8 @@ const Dashboard = (props) => {
         <div className="col s12 m5 offset-m1 push-m6">
           <Notifications notifications={notifications} />
         </div>
-        <div className="col s12 m6 pull-m5">
+        <div className="col s12 m6 pull-m5 task-list">
+          <h4 className="news-feed">News Feed</h4>
           <TaskList tasks={tasks} />
         </div>
       </div>

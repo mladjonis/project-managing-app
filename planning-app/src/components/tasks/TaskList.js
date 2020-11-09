@@ -4,7 +4,7 @@ import TaskSummary from "./TaskSummary";
 
 const TaskList = ({ tasks }) => {
   return (
-    <div className="task-list section">
+    <div className="section">
       {tasks &&
         tasks.map((task) => {
           return (

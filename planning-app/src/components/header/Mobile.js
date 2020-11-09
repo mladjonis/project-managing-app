@@ -4,7 +4,7 @@ import { signOut } from "../../actions";
 import { connect } from "react-redux";
 
 const Mobile = (props) => {
-  console.log(props);
+  //console.log(props);
   let loggedIn;
   if (props.isLoggedIn) {
     loggedIn = (

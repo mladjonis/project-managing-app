@@ -14,7 +14,6 @@ body {
 
 form {
   padding: 1.2rem;
-  margin-top: 3rem;
 }
 
 form button,
@@ -64,7 +63,6 @@ section {
 main {
   padding: 10px;
   height: 80vh;
-  margin: 10vh 0 10vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -121,4 +119,50 @@ img {
   height: 40px;
   border-radius: 50%;
   margin: 2px 5px;
+}
+
+.task-list:nth-child(1) {
+  margin-top: -0.7rem;
+}
+
+.task-list {
+  border: 5px solid white;
+  overflow-y: auto;
+  height: 500px;
+  margin-top: 20px;
+  background-color: darkcyan;
+}
+/*napisati ovo cudo da se smanji razmak na telefonu i tabletima*/
+/* @media (screen-width: )  */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.news-feed {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.bold-notifications-name {
+  font-weight: bold;
+}
+
+.heading-chat-room {
+  text-align: center;
+  color: wheat;
 }

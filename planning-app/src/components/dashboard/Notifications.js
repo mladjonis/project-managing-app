@@ -12,11 +12,14 @@ const Notifications = ({ notifications }) => {
               notifications.map((notification) => {
                 return (
                   <li key={notification.id}>
-                    <span className="black-text">{notification.user} </span>
+                    <span className="black-text bold-notifications-name">
+                      {notification.user}{" "}
+                    </span>{" "}
                     <span>{notification.content}</span>
                     <div className="grey-text note-date">
                       {moment(notification.time.toDate()).fromNow()}
                     </div>
+                    <hr />
                   </li>
                 );
               })}

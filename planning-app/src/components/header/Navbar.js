@@ -14,22 +14,28 @@ const Navbar = (props) => {
   ) : (
     <SignOutLink />
   );
+  const chatLoggedIn = firebaseAuth.uid ? (
+    <Link to="/chat" className="right">
+      <i className="medium material-icons">chat</i>
+    </Link>
+  ) : null;
 
-  const handleClick = (e) => {
-    console.log(e);
-    setInstance(!instance);
-  };
+  // const handleClick = (e) => {
+  //   console.log(e);
+  //   setInstance(!instance);
+  // };
   return (
     <React.Fragment>
       <nav className="nav-wrapper light-blue darken-3">
         <div className="container">
-          <Link to="/" className="brand-logo ">
+          <Link to="/" className="brand-logo">
             Atila
           </Link>
           <Link to="/" data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </Link>
           {loggedInLinks}
+          {chatLoggedIn}
           {/* <div
             className="right myDiv"
             style={{

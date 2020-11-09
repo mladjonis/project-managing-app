@@ -20,6 +20,11 @@ const SignInLink = (props) => {
           {props.profile.initials}
         </NavLink>
       </li>
+      {/* <li>
+        <NavLink to="/chat" className="right">
+          <i className="medium material-icons">chat</i>
+        </NavLink>
+      </li> */}
     </ul>
   );
 };

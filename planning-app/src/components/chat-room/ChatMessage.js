@@ -1,16 +1,11 @@
 import React from "react";
+import moment from "moment";
 
 const ChatMessage = (props) => {
-  const { text, uid, photoURL } = props.message;
+  const { text, uid, photoURL, createdAt } = props.message;
+  console.log(createdAt);
   const sentOrReceivedClass = uid === props.uid ? "sent" : "received";
-  console.log(sentOrReceivedClass);
-  console.log(props);
-  //console.log(props);
   return (
-    // <div className={`message ${sentOrReceivedClass}`}>
-    //   <img src={photoURL} className="circle responsive-img"/>
-    //   <p>{text}</p>
-    // </div>
     <div
       className={`col s12 m8 offset-m2 l6 offset-l3 message ${sentOrReceivedClass}`}
     >
@@ -23,9 +18,16 @@ const ChatMessage = (props) => {
               className="circle responsive-img"
             />
           </div>
+          <div>
+            {props.profile.firstName} {props.profile.lastName}
+          </div>
           <div className="col s10">
             <span className="black-text">{text}</span>
           </div>
+          <p className="note-date black-text">
+            {moment(createdAt.toDate()).fromNow()} at{" "}
+            {moment.utc(createdAt.seconds * 1000).format("HH:mm")}
+          </p>
         </div>
       </div>
     </div>
