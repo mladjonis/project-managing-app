@@ -7,3 +7,5 @@ export const SIGNOUT_ERROR = "SIGNOUT_ERROR";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_ERROR = "SIGN_UP_ERROR";
 export const SEND_MESSAGE = "SEND_MESSAGE";
+export const UPDATE_USER = "UPDATE_USER";
+export const ERROR_UPDATING_USER = "ERROR_UPDATING_USER";

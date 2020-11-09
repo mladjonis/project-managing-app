@@ -3,7 +3,7 @@ import moment from "moment";
 
 const ChatMessage = (props) => {
   const { text, uid, photoURL, createdAt } = props.message;
-  console.log(createdAt);
+  //console.log(createdAt);
   const sentOrReceivedClass = uid === props.uid ? "sent" : "received";
   return (
     <div

@@ -8,6 +8,8 @@ import {
   SIGN_UP_ERROR,
   SIGN_UP_SUCCESS,
   SEND_MESSAGE,
+  UPDATE_USER,
+  ERROR_UPDATING_USER,
 } from "./types";
 import firebaseConfig from "../config/firebaseConfig";
 
@@ -133,5 +135,23 @@ export const getMessages = () => {
       .limit(25);
 
     dispatch({ type: "FETCH_MESSAGES", payload: messages });
+  };
+};
+
+export const updateUser = (user) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    firestore
+      .collection("users")
+      .doc(user.uid)
+      .set({
+        ...user,
+      })
+      .then((response) => {
+        dispatch({ type: UPDATE_USER, payload: response });
+      })
+      .catch((err) => {
+        dispatch({ type: ERROR_UPDATING_USER, payload: err });
+      });
   };
 };
