@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signUp } from "../../actions";
+import ImageUpload from "../image-upload/ImageUpload";
 
 class SignUp extends React.Component {
   state = {
@@ -9,11 +10,24 @@ class SignUp extends React.Component {
     email: "",
     firstName: "",
     lastName: "",
+    photoURL: "",
+    file: null,
   };
 
   componentDidMount() {
     document.title = "Atila managing app - Sign up";
   }
+
+  onImageChange = (image, file) => {
+    // console.log(image);
+    // console.log(file);
+    this.setState({
+      photoURL: image,
+      file: file,
+    });
+    //console.log(this.state);
+    //console.log({ ...this.state, photoURL: image });
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -24,6 +38,7 @@ class SignUp extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     //console.log(e);
+    console.log(this.state);
     this.props.signUp(this.state);
   };
   render() {
@@ -32,7 +47,8 @@ class SignUp extends React.Component {
     if (auth.uid) {
       return <Redirect to="/" />;
     }
-    console.log(this.state);
+    //console.log(this.props);
+    //console.log(this.state);
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} className="white">
@@ -53,6 +69,7 @@ class SignUp extends React.Component {
             <label htmlFor="lastName">Last name</label>
             <input type="text" id="lastName" onChange={this.handleChange} />
           </div>
+          <ImageUpload onImageChange={this.onImageChange} />
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Submit</button>
             <div className="red-text center">

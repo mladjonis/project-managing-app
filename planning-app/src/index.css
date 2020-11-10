@@ -114,7 +114,7 @@ p {
   color: black;
 }
 
-img {
+.chat-message-image {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -165,4 +165,17 @@ img {
 .heading-chat-room {
   text-align: center;
   color: wheat;
+}
+
+.sign-up-image {
+  display: block;
+  height: 200px;
+  width: 200px;
+  margin: 5px auto;
+  border: 3px solid black;
+  cursor: pointer;
+}
+
+.inline-selected-text {
+  display: -webkit-box;
 }

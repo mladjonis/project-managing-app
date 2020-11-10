@@ -15,7 +15,7 @@ const ChatMessage = (props) => {
             <img
               src={photoURL}
               alt={photoURL}
-              className="circle responsive-img"
+              className="circle responsive-img chat-message-image"
             />
           </div>
           <div>
