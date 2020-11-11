@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../../actions";
+import UserProfile from "../profile/UserProfile";
 
 const SignInLink = (props) => {
   return (
@@ -14,9 +15,17 @@ const SignInLink = (props) => {
         </NavLink>
       </li>
       <li>
-        {/* Initials of full name we will see*/}
-        <NavLink to="/" className="btn btn-floating lighten-1">
-          {props.profile.initials}
+        <NavLink
+          to={`/profile/${props.uid}`}
+          className="btn btn-floating lighten-1"
+        >
+          {/* {props.profile.initials} */}
+          <img
+            className="profile-image"
+            src={props.profile.imageFullURL}
+            alt="image"
+          />
+          {/* <UserProfile /> */}
         </NavLink>
       </li>
       {/* <li>

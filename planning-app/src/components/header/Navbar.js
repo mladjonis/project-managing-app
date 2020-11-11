@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 const Navbar = (props) => {
   const { firebaseAuth, profile } = props;
   const loggedInLinks = firebaseAuth.uid ? (
-    <SignInLink profile={profile} />
+    <SignInLink profile={profile} uid={firebaseAuth.uid} />
   ) : (
     <SignOutLink />
   );
