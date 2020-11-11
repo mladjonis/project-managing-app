@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { signOut } from "../../actions";
 
 const SignInLink = (props) => {
-  //console.log(props);
   return (
     <ul className="right hide-on-med-and-down">
       <li>

@@ -47,8 +47,6 @@ class ChatRoom extends React.Component {
   };
   render() {
     const { auth, messages } = this.props;
-    // console.log("chatroom props", this.props);
-    // console.log("state", this.state);
     if (!auth.uid) {
       return <Redirect to="/" />;
     }
@@ -93,7 +91,6 @@ class ChatRoom extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  //console.log(state);
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,

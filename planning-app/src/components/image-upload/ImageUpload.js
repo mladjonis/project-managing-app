@@ -18,7 +18,7 @@ const ImageUpload = (props) => {
         alt="image"
         ref={ref}
       />
-      {image ? <img className="sign-up-image" src={image} /> : null}
+      {image ? <img className="sign-up-image" src={image} alt="image" /> : null}
     </div>
   );
 };

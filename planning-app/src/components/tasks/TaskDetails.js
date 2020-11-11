@@ -43,9 +43,7 @@ const TaskDetails = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log(state);
   const id = ownProps.match.params.id;
-  // console.log(ownProps);
   const tasks = state.firestore.data.tasks;
   const task = tasks ? tasks[id] : null;
   return {

@@ -8,9 +8,6 @@ import { firestoreConnect } from "react-redux-firebase";
 
 const Dashboard = (props) => {
   const { tasks, auth, notifications } = props;
-  //console.log(props);
-  //console.log(props);
-
   if (!auth.uid) {
     return <Redirect to="/signin" />;
   }
@@ -30,7 +27,6 @@ const Dashboard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  //console.log(state);
   return {
     tasks: state.firestore.ordered.tasks,
     auth: state.firebase.auth,

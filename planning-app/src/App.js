@@ -24,7 +24,7 @@ function App() {
         <Navbar />
         <Switch>
           {/* <GuardedRoute exact path="/" component={Dashboard} /> */}
-          <Route path="/" exact component={Dashboard} /> {/*Dashboard */}
+          <Route path="/" exact component={Dashboard} />
           <Route path="/task/:id" component={TaskDetails} />
           <Route path="/signin/" component={SignIn} />
           <Route path="/signup" component={SignUp} />

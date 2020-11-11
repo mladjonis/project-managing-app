@@ -15,14 +15,11 @@ class CreateTask extends React.Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log(this.props);
     this.props.createTask(this.state);
     this.props.history.push("/");
   };
   render() {
     document.title = "Atila managing app - Create task";
-    //console.log(this.state);
     const { auth } = this.props;
     if (!auth.uid) {
       return <Redirect to="/signin" />;

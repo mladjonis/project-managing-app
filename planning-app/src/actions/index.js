@@ -7,11 +7,9 @@ import {
   SIGNOUT_SUCCESS,
   SIGN_UP_ERROR,
   SIGN_UP_SUCCESS,
-  SEND_MESSAGE,
   UPDATE_USER,
   ERROR_UPDATING_USER,
 } from "./types";
-import firebaseConfig from "../config/firebaseConfig";
 
 export const createTask = (task) => {
   //{} destructuring thunk extra arguments
@@ -40,7 +38,6 @@ export const createTask = (task) => {
 
 export const signIn = (cred) => {
   return (dispatch, getState, { getFirebase }) => {
-    //console.log(getFirebase);
     const firebase = getFirebase();
 
     firebase
@@ -50,7 +47,6 @@ export const signIn = (cred) => {
         dispatch({ type: SIGN_IN_SUCCESS });
       })
       .catch((err) => {
-        //console.log(err);
         dispatch({ type: SIGN_IN_ERROR, payload: err.message });
       });
   };
@@ -76,7 +72,6 @@ export const signUp = (user) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
-    console.log(user);
     let uid = "";
 
     firebase
@@ -95,37 +90,26 @@ export const signUp = (user) => {
           });
       })
       .then((re) => {
-        console.log(1);
         return firebase.storage().ref(`images/${user.photoURL}`).put(user.file);
-        // dispatch({ type: SIGN_UP_SUCCESS });
       })
       .then((r) => {
-        console.log(2);
-        console.log(r);
         return firebase
           .storage()
           .ref(`images/${user.photoURL}`)
           .getDownloadURL();
-        //dispatch({ type: SIGN_UP_SUCCESS});
       })
       .then((rr) => {
-        console.log(uid);
-        console.log(3);
-        console.log(rr);
         firestore.collection("users").doc(uid).set(
           {
             imageFullURL: rr,
           },
           { merge: true }
         );
-
-        // return firestore.storage().
       })
       .then(() => {
         dispatch({ type: SIGN_UP_SUCCESS });
       })
       .catch((err) => {
-        console.log(err);
         dispatch({ type: SIGN_UP_ERROR, payload: err.message });
       });
   };
@@ -135,7 +119,6 @@ export const sendMessage = (message) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
-    //console.log(getState());
 
     const userProfile = getState().firebase.profile;
     const userId = getState().firebase.auth.uid;

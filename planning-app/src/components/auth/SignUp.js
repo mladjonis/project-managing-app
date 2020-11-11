@@ -19,26 +19,19 @@ class SignUp extends React.Component {
   }
 
   onImageChange = (image, file) => {
-    // console.log(image);
-    // console.log(file);
     this.setState({
       photoURL: image,
       file: file,
     });
-    //console.log(this.state);
-    //console.log({ ...this.state, photoURL: image });
   };
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
-    //console.log(this.state);
   };
   onSubmit = (e) => {
     e.preventDefault();
-    //console.log(e);
-    console.log(this.state);
     this.props.signUp(this.state);
   };
   render() {
@@ -47,8 +40,6 @@ class SignUp extends React.Component {
     if (auth.uid) {
       return <Redirect to="/" />;
     }
-    //console.log(this.props);
-    //console.log(this.state);
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} className="white">

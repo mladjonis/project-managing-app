@@ -12,17 +12,13 @@ class SignIn extends React.Component {
     this.setState({
       [e.target.id]: e.target.value,
     });
-    //console.log(this.state);
   };
   onSubmit = (e) => {
     e.preventDefault();
-    //console.log(e);
-    console.log(this.props);
     this.props.signIn(this.state);
   };
   render() {
     document.title = "Atila managing app - Sign in";
-    //console.log(this.state);
     const { authError } = this.props;
     const { auth } = this.props;
 
@@ -54,7 +50,6 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     authError: state.auth.authError,
     auth: state.firebase.auth,
