@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { updateUser } from "../../actions";
+import { updateUser, getCurrentUser } from "../../actions";
 import ImageUpload from "../image-upload/ImageUpload";
 
 class UserProfile extends Component {
@@ -22,6 +22,14 @@ class UserProfile extends Component {
 
   componentDidMount() {
     document.title = "Atila managing app - User profile";
+    console.log(this.props);
+    this.setState({
+      ...this.state,
+      ...this.props.profile,
+    });
+    console.log({ ...this.state, ...this.props.profile });
+    console.log(this.state);
+    //this.props.getCurrentUser();
   }
 
   onImageChange = (image, file) => {
@@ -39,6 +47,7 @@ class UserProfile extends Component {
 
   render() {
     const { profile, auth, changeError } = this.props;
+    console.log(this.state);
     if (this.props.match.params.id !== auth.uid) {
       //nije ulogovan user nego gleda profil ili je pogodjen slucajno link profila tj uid ne dati da se menjaju podaci
     }
@@ -65,7 +74,7 @@ class UserProfile extends Component {
             <input
               type="text"
               id="firstName"
-              value={profile.firstName}
+              value={this.state.firstName}
               onChange={this.handleChange}
             />
           </div>
@@ -74,7 +83,7 @@ class UserProfile extends Component {
             <input
               type="text"
               id="lastName"
-              value={profile.lastName}
+              value={this.state.lastName}
               onChange={this.handleChange}
             />
           </div>
@@ -105,6 +114,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
+    getCurrentUser: () => dispatch(getCurrentUser()),
   };
 };
 

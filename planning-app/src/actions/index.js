@@ -11,6 +11,15 @@ import {
   ERROR_UPDATING_USER,
 } from "./types";
 
+export const getCurrentUser = () => {
+  return (dispatch, getState, { getFirebase }) => {
+    const fb = getFirebase();
+
+    const user = fb.auth().currentUser;
+    console.log(user);
+  };
+};
+
 export const createTask = (task) => {
   //{} destructuring thunk extra arguments
   return (dispatch, getState, { getFirestore }) => {
