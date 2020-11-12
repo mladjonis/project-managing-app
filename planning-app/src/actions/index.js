@@ -167,25 +167,57 @@ export const getMessages = () => {
 };
 
 export const updateUser = (user) => {
-  return (dispatch, getState, { getFirestore }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
+    const firebase = getFirebase();
     const user1 = getState();
+    const currentUser = firebase.auth().currentUser;
     console.log(user1);
     console.log(user);
-    // firestore
-    //   .collection("users")
-    //   .doc(user.uid)
-    //   .set({
-    //     firstName: user.firstName,
-    //     lastName: user.lastName
-    //   },
-    //   { merge: true }
-    //   )
-    //   .then((response) => {
-    //     dispatch({ type: UPDATE_USER, payload: response });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({ type: ERROR_UPDATING_USER, payload: err });
-    //   });
+    firestore
+      .collection("users")
+      .doc(currentUser.uid)
+      .set(
+        {
+          firstName: user.firstName,
+          lastName: user.lastName,
+        },
+        { merge: true }
+      )
+      .then((response) => {
+        if (currentUser.email !== user.email) {
+          currentUser
+            .updateEmail(user.email)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((err) => {
+              //handle error
+              console.log(err);
+            });
+        }
+        dispatch({ type: UPDATE_USER, payload: response });
+      })
+      .catch((err) => {
+        dispatch({ type: ERROR_UPDATING_USER, payload: err });
+      });
+  };
+};
+
+const updateUserEmail = (newEmail) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    const firebase = getFirebase();
+
+    const user = firebase.auth().currentUser;
+
+    user
+      .updateEmail(newEmail)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        //handle error
+        console.log(err);
+      });
   };
 };

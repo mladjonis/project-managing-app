@@ -23,12 +23,13 @@ class UserProfile extends Component {
 
   componentDidMount() {
     document.title = "Atila managing app - User profile";
+
+    this.props.getCurrentUser();
     this.setState({
       ...this.state,
       ...this.props.profile,
-      email: this.props.user.email,
+      email: this.props.user.user.email,
     });
-    this.props.getCurrentUser();
     console.log(this.props);
   }
 
@@ -118,7 +119,7 @@ class UserProfile extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    user: state.user.user,
+    user: state.user,
     profile: state.firebase.profile,
     auth: state.firebase.auth,
     changeError: state.auth.authError,
