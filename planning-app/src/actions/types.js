@@ -9,3 +9,5 @@ export const SIGN_UP_ERROR = "SIGN_UP_ERROR";
 export const SEND_MESSAGE = "SEND_MESSAGE";
 export const UPDATE_USER = "UPDATE_USER";
 export const ERROR_UPDATING_USER = "ERROR_UPDATING_USER";
+export const UPDATE_EMAIL_USER = "UPDATE_EMAIL_USER";
+export const GET_USER = "GET_USER";

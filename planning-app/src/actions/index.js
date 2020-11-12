@@ -9,6 +9,8 @@ import {
   SIGN_UP_SUCCESS,
   UPDATE_USER,
   ERROR_UPDATING_USER,
+  UPDATE_EMAIL_USER,
+  GET_USER,
 } from "./types";
 
 export const getCurrentUser = () => {
@@ -17,6 +19,8 @@ export const getCurrentUser = () => {
 
     const user = fb.auth().currentUser;
     console.log(user);
+    dispatch({ type: GET_USER, payload: user });
+    //console.log(user);
   };
 };
 
@@ -165,17 +169,23 @@ export const getMessages = () => {
 export const updateUser = (user) => {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
-    firestore
-      .collection("users")
-      .doc(user.uid)
-      .set({
-        ...user,
-      })
-      .then((response) => {
-        dispatch({ type: UPDATE_USER, payload: response });
-      })
-      .catch((err) => {
-        dispatch({ type: ERROR_UPDATING_USER, payload: err });
-      });
+    const user1 = getState();
+    console.log(user1);
+    console.log(user);
+    // firestore
+    //   .collection("users")
+    //   .doc(user.uid)
+    //   .set({
+    //     firstName: user.firstName,
+    //     lastName: user.lastName
+    //   },
+    //   { merge: true }
+    //   )
+    //   .then((response) => {
+    //     dispatch({ type: UPDATE_USER, payload: response });
+    //   })
+    //   .catch((err) => {
+    //     dispatch({ type: ERROR_UPDATING_USER, payload: err });
+    //   });
   };
 };

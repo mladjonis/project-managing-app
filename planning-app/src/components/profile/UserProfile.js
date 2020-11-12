@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { updateUser, getCurrentUser } from "../../actions";
 import ImageUpload from "../image-upload/ImageUpload";
+import M from "materialize-css";
 
 class UserProfile extends Component {
   state = {
@@ -17,19 +18,18 @@ class UserProfile extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     //call api
-    //this.props.updateUser(this.state);
+    this.props.updateUser(this.state);
   };
 
   componentDidMount() {
     document.title = "Atila managing app - User profile";
-    console.log(this.props);
     this.setState({
       ...this.state,
       ...this.props.profile,
+      email: this.props.user.email,
     });
-    console.log({ ...this.state, ...this.props.profile });
-    console.log(this.state);
-    //this.props.getCurrentUser();
+    this.props.getCurrentUser();
+    console.log(this.props);
   }
 
   onImageChange = (image, file) => {
@@ -46,8 +46,8 @@ class UserProfile extends Component {
   };
 
   render() {
-    const { profile, auth, changeError } = this.props;
     console.log(this.state);
+    const { profile, auth, changeError, user } = this.props;
     if (this.props.match.params.id !== auth.uid) {
       //nije ulogovan user nego gleda profil ili je pogodjen slucajno link profila tj uid ne dati da se menjaju podaci
     }
@@ -58,34 +58,47 @@ class UserProfile extends Component {
     return (
       <div className="container">
         <form onSubmit={this.onSubmit} className="white">
-          <h5 className="grey-text text-darken-3">
-            {profile.firstName} {profile.lastName}
+          <h5 className="grey-text text-darken-3 center-align">
+            Profile for user: {profile.firstName} {profile.lastName}
           </h5>
-          {/* <div className="input-field">
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" value={auth.email} onChange={this.handleChange} />
-      </div> */}
+          <div className="input-field">
+            <label className="active" htmlFor="email">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
           {/* <div className="input-field">
         <label htmlFor="password">Password</label>
         <input type="password" id="password" onChange={this.handleChange} />
       </div> */}
           <div className="input-field">
-            <label htmlFor="firstName">First name</label>
+            <label className="active" htmlFor="firstName">
+              First name
+            </label>
             <input
               type="text"
               id="firstName"
               value={this.state.firstName}
               onChange={this.handleChange}
             />
+            <span className="helper-text"></span>
           </div>
           <div className="input-field">
-            <label htmlFor="lastName">Last name</label>
+            <label className="active" htmlFor="lastName">
+              Last name
+            </label>
             <input
               type="text"
               id="lastName"
               value={this.state.lastName}
               onChange={this.handleChange}
             />
+            <span className="helper-text"></span>
           </div>
           <ImageUpload onImageChange={this.onImageChange} />
           <div className="input-field">
@@ -105,6 +118,7 @@ class UserProfile extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
+    user: state.user.user,
     profile: state.firebase.profile,
     auth: state.firebase.auth,
     changeError: state.auth.authError,

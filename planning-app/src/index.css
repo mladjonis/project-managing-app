@@ -185,3 +185,9 @@ p {
 .inline-selected-text {
   display: -webkit-box;
 }
+
+/* invalid color */
+.input-field input[type="text"].invalid {
+  border-bottom: 1px solid red;
+  box-shadow: 0 1px 0 0 red;
+}

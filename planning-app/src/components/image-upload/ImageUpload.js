@@ -10,14 +10,14 @@ const ImageUpload = (props) => {
   };
 
   return (
-    <div>
-      <input
-        className="inline-selected-text"
-        type="file"
-        onChange={onChangeImage}
-        alt="image"
-        ref={ref}
-      />
+    <div className="file-field input-field">
+      <div className="btn">
+        <span>File</span>
+        <input type="file" onChange={onChangeImage} alt="image" ref={ref} />
+      </div>
+      <div className="file-path-wrapper">
+        <input className="file-path validate" type="text" />
+      </div>
       {image ? <img className="sign-up-image" src={image} alt="image" /> : null}
     </div>
   );
