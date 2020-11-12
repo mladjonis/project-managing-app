@@ -91,10 +91,14 @@ export const signUp = (user) => {
       .auth()
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((response) => {
+        console.log(response);
         uid = response.user.uid;
+        return response.user.sendEmailVerification();
+      })
+      .then((r) => {
         return firestore
           .collection("users")
-          .doc(response.user.uid)
+          .doc(uid)
           .set({
             firstName: user.firstName,
             lastName: user.lastName,
@@ -188,15 +192,16 @@ export const updateUser = (user) => {
         if (currentUser.email !== user.email) {
           currentUser
             .updateEmail(user.email)
-            .then((response) => {
-              console.log(response);
+            .then(() => {
+              // uspesno
+              dispatch({ type: UPDATE_USER, payload: response });
             })
             .catch((err) => {
               //handle error
               console.log(err);
+              dispatch({ type: ERROR_UPDATING_USER, payload: err });
             });
         }
-        dispatch({ type: UPDATE_USER, payload: response });
       })
       .catch((err) => {
         dispatch({ type: ERROR_UPDATING_USER, payload: err });
