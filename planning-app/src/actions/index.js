@@ -221,7 +221,7 @@ export const updateUser = (user) => {
         }
       })
       .then((rr) => {
-        return firestore.collection("users").doc(uid).set(
+        return firestore.collection("users").doc(currentUser.uid).set(
           {
             imageFullURL: rr,
           },
