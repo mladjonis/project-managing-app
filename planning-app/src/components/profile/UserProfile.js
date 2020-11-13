@@ -21,10 +21,10 @@ class UserProfile extends Component {
     this.props.updateUser(this.state);
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     document.title = "Atila managing app - User profile";
-
-    this.props.getCurrentUser();
+    console.log(this.props);
+    await this.props.getCurrentUser();
     this.setState({
       ...this.state,
       ...this.props.profile,
