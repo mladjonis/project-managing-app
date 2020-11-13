@@ -1,18 +1,7 @@
-import { ADD_TASK, ADD_TASK_ERROR } from "../actions/types";
+import { ADD_TASK, ADD_TASK_ERROR, GET_NEXT_TASKS } from "../actions/types";
 
 const initState = {
-  tasks: [
-    {
-      id: "1",
-      title: "title1",
-      details: "lorem lorem lorem lorem lorem lorem",
-    },
-    {
-      id: "2",
-      title: "title2",
-      details: "aodkasodkosakdoksad lorem sakdoasokd lorem saijdias",
-    },
-  ],
+  tasks: [],
 };
 
 const taskReducer = (state = initState, action) => {
@@ -23,6 +12,9 @@ const taskReducer = (state = initState, action) => {
     case ADD_TASK_ERROR:
       //console.log("ADD_TASK_ERROR", action.payload);
       return state;
+    case GET_NEXT_TASKS:
+      console.log(action.payload);
+      return [...state, ...action.payload];
     default:
       return state;
   }

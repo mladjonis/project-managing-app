@@ -5,9 +5,14 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
+import { getNextTasks } from "../../actions";
 
 const Dashboard = (props) => {
   const { tasks, auth, notifications } = props;
+
+  const loadNextTasks = () => {
+    props.getNextTasks(tasks[0]);
+  };
   if (!auth.uid) {
     return <Redirect to="/signin" />;
   }
@@ -21,6 +26,7 @@ const Dashboard = (props) => {
           <h4 className="news-feed">News Feed</h4>
           <TaskList tasks={tasks} />
         </div>
+        <button onClick={loadNextTasks}> DUGME </button>
       </div>
     </div>
   );
@@ -34,10 +40,16 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getNextTasks: (lastTask) => dispatch(getNextTasks(lastTask)),
+  };
+};
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
-    { collection: "tasks", orderBy: ["createdAt", "desc"] },
+    { collection: "tasks", limit: 10, orderBy: ["createdAt", "desc"] },
     { collection: "notifications", limit: 5, orderBy: ["time", "desc"] },
   ])
 )(Dashboard);
