@@ -170,14 +170,13 @@ export const getMessages = () => {
   };
 };
 
+//phandle picture change
 export const updateUser = (user) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
-    const user1 = getState();
     const currentUser = firebase.auth().currentUser;
-    console.log(user1);
-    console.log(user);
+    let updatedUser = null;
     firestore
       .collection("users")
       .doc(currentUser.uid)
@@ -189,40 +188,51 @@ export const updateUser = (user) => {
         { merge: true }
       )
       .then((response) => {
+        updatedUser = response;
         if (currentUser.email !== user.email) {
-          currentUser
+          return currentUser
             .updateEmail(user.email)
             .then(() => {
               // uspesno
-              dispatch({ type: UPDATE_USER, payload: response });
+              //dispatch({ type: UPDATE_USER, payload: response });
             })
             .catch((err) => {
               //handle error
-              console.log(err);
+              //console.log(err);
               dispatch({ type: ERROR_UPDATING_USER, payload: err });
             });
         }
       })
-      .catch((err) => {
-        dispatch({ type: ERROR_UPDATING_USER, payload: err });
-      });
-  };
-};
-
-const updateUserEmail = (newEmail) => {
-  return (dispatch, getState, { getFirestore, getFirebase }) => {
-    const firebase = getFirebase();
-
-    const user = firebase.auth().currentUser;
-
-    user
-      .updateEmail(newEmail)
-      .then((response) => {
-        console.log(response);
+      .then((res) => {
+        //handle image change
+        if (currentUser.photoURL !== user.photoURL) {
+          return firebase
+            .storage()
+            .ref(`images/${user.photoURL}`)
+            .put(user.file);
+        }
+      })
+      .then((r) => {
+        if (currentUser.photoURL !== user.photoURL) {
+          return firebase
+            .storage()
+            .ref(`images/${user.photoURL}`)
+            .getDownloadURL();
+        }
+      })
+      .then((rr) => {
+        return firestore.collection("users").doc(uid).set(
+          {
+            imageFullURL: rr,
+          },
+          { merge: true }
+        );
+      })
+      .then((usr) => {
+        dispatch({ type: UPDATE_USER, payload: usr });
       })
       .catch((err) => {
-        //handle error
-        console.log(err);
+        dispatch({ type: ERROR_UPDATING_USER, payload: err });
       });
   };
 };
