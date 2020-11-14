@@ -14,25 +14,20 @@ import {
   GET_NEXT_TASKS,
 } from "./types";
 
-export const getNextTasks = (lastTask) => {
+export const getNextTasks = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    console.log(firestore.collection("tasks"));
     const tasks = firestore
       .collection("tasks")
       .orderBy("createdAt", "desc")
       .limit(10);
 
     tasks.get().then((documentSnapshots) => {
-      // Get the last visible document
       const lastVisible =
         documentSnapshots.docs[documentSnapshots.docs.length - 1];
-      console.log("last", lastVisible);
-      console.log("last data", lastVisible.data());
+      let data = [];
 
-      // Construct a new query starting at this document,
-      // get the next 25 cities.
-      const next = firestore
+      firestore
         .collection("tasks")
         .orderBy("createdAt", "desc")
         .startAfter(lastVisible)
@@ -40,13 +35,10 @@ export const getNextTasks = (lastTask) => {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
+            data.push({ id: doc.id, ...doc.data() });
           });
+          dispatch({ type: GET_NEXT_TASKS, payload: data });
         });
-
-      console.log(next);
-      dispatch({ type: GET_NEXT_TASKS, payload: next });
     });
   };
 };

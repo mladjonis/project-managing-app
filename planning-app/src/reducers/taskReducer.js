@@ -14,7 +14,7 @@ const taskReducer = (state = initState, action) => {
       return state;
     case GET_NEXT_TASKS:
       console.log(action.payload);
-      return [...state, ...action.payload];
+      return { ...state, tasks: action.payload };
     default:
       return state;
   }
