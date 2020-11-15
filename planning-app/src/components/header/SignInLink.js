@@ -17,7 +17,9 @@ const SignInLink = (props) => {
       <li>
         <NavLink
           to={`/profile/${props.uid}`}
-          className="btn btn-floating lighten-1"
+          className="btn btn-floating lighten-1 tooltipped"
+          data-position="bottom"
+          data-tooltip="Go to profile"
         >
           {/* {props.profile.initials} */}
           <img
