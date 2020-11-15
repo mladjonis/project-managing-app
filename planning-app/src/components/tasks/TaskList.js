@@ -1,43 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DateFilter from "./DateFilter";
 import SearchBar from "./SearchBar";
 import TaskSummary from "./TaskSummary";
-
-// const TaskList = ({ tasks }) => {
-//   const [term, setTerm] = useState(null);
-//   const onSearchSubmit = (t) => {
-//     console.log("task list forma", t);
-
-//     const regex = `${t}`;
-//     const condition = new RegExp(regex, "gi");
-//     //setTerm(condition);
-//     // for (const match of tasks) {
-//     //   if (condition.test(match.title)) {
-//     //     arr.push(match);
-//     //   } else if (condition.test(match.authorFirstName)) {
-//     //     arr.push(match);
-//     //   } else if (condition.test(match.authorLastName)) {
-//     //     arr.push(match);
-//     //   }
-//     // }
-//   };
-
-//   return (
-//     <React.Fragment>
-//       <SearchBar onSubmit={onSearchSubmit} />
-//       <div className="section">
-//         {tasks &&
-//           tasks.map((task) => {
-//             return (
-//               <Link key={task.id} to={`/task/${task.id}`}>
-//                 <TaskSummary task={task} />
-//               </Link>
-//             );
-//           })}
-//       </div>
-//     </React.Fragment>
-//   );
-// };
 
 class TaskList extends React.Component {
   state = {
@@ -47,21 +12,24 @@ class TaskList extends React.Component {
   onSearchSubmit = (t) => {
     const regex = `${t}`;
     const condition = new RegExp(regex, "gi");
-    let arr = [];
     if (this.props.tasks) {
-      for (const match of this.props.tasks) {
-        if (condition.test(match.title)) {
-          arr.push(match);
-        } else if (condition.test(match.authorFirstName)) {
-          arr.push(match);
-        } else if (condition.test(match.authorLastName)) {
-          arr.push(match);
-        }
-      }
       this.setState({
-        term: [...arr],
+        term: [...this.filterTasks(condition)],
       });
     }
+  };
+  filterTasks = (condition) => {
+    let arr = [];
+    this.props.tasks.forEach((task) => {
+      if (condition.test(task.title)) {
+        arr.push(task);
+      } else if (condition.test(task.authorFirstName)) {
+        arr.push(task);
+      } else if (condition.test(task.authorLastName)) {
+        arr.push(task);
+      }
+    });
+    return arr;
   };
   render() {
     const { tasks } = this.props;
@@ -69,6 +37,7 @@ class TaskList extends React.Component {
     return (
       <React.Fragment>
         <SearchBar onSubmit={this.onSearchSubmit} />
+        <DateFilter />
         <div className="section">
           {!this.state.term.length
             ? tasks &&

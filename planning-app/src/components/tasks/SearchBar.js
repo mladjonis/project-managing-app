@@ -15,7 +15,6 @@ const SearchBar = ({ onSubmit }) => {
 
   useEffect(() => {
     const search = () => {
-      console.log("search bar search");
       onSubmit(debouncedTerm);
     };
 
