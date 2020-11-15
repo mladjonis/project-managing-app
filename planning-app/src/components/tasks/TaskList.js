@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import TaskSummary from "./TaskSummary";
@@ -45,23 +45,23 @@ class TaskList extends React.Component {
   };
 
   onSearchSubmit = (t) => {
-    console.log("task list forma", t);
-
     const regex = `${t}`;
     const condition = new RegExp(regex, "gi");
     let arr = [];
-    for (const match of this.props.tasks) {
-      if (condition.test(match.title)) {
-        arr.push(match);
-      } else if (condition.test(match.authorFirstName)) {
-        arr.push(match);
-      } else if (condition.test(match.authorLastName)) {
-        arr.push(match);
+    if (this.props.tasks) {
+      for (const match of this.props.tasks) {
+        if (condition.test(match.title)) {
+          arr.push(match);
+        } else if (condition.test(match.authorFirstName)) {
+          arr.push(match);
+        } else if (condition.test(match.authorLastName)) {
+          arr.push(match);
+        }
       }
+      this.setState({
+        term: [...arr],
+      });
     }
-    this.setState({
-      term: [...arr],
-    });
   };
   render() {
     const { tasks } = this.props;

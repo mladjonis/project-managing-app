@@ -13,12 +13,23 @@ const ImageUpload = (props) => {
     <div className="file-field input-field">
       <div className="btn">
         <span>File</span>
-        <input type="file" onChange={onChangeImage} alt="image" ref={ref} />
+        <input
+          type="file"
+          onChange={onChangeImage}
+          alt="path is wrong, cant show"
+          ref={ref}
+        />
       </div>
       <div className="file-path-wrapper">
         <input className="file-path validate" type="text" />
       </div>
-      {image ? <img className="sign-up-image" src={image} alt="image" /> : null}
+      {image ? (
+        <img
+          className="sign-up-image"
+          src={image}
+          alt="path is wrong, cant show"
+        />
+      ) : null}
     </div>
   );
 };

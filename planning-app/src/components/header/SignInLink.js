@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../../actions";
-import UserProfile from "../profile/UserProfile";
 
 const SignInLink = (props) => {
   return (
@@ -21,20 +20,13 @@ const SignInLink = (props) => {
           data-position="bottom"
           data-tooltip="Go to profile"
         >
-          {/* {props.profile.initials} */}
           <img
             className="profile-image"
             src={props.profile.imageFullURL}
-            alt="image"
+            alt="user profile imaga"
           />
-          {/* <UserProfile /> */}
         </NavLink>
       </li>
-      {/* <li>
-        <NavLink to="/chat" className="right">
-          <i className="medium material-icons">chat</i>
-        </NavLink>
-      </li> */}
     </ul>
   );
 };

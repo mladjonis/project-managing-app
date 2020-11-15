@@ -9,7 +9,6 @@ import {
   SIGN_UP_SUCCESS,
   UPDATE_USER,
   ERROR_UPDATING_USER,
-  UPDATE_EMAIL_USER,
   GET_USER,
   GET_NEXT_TASKS,
 } from "./types";
@@ -164,7 +163,6 @@ export const signUp = (user) => {
 
 export const sendMessage = (message) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    const firebase = getFirebase();
     const firestore = getFirestore();
 
     const userProfile = getState().firebase.profile;
@@ -206,7 +204,6 @@ export const updateUser = (user) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
     const currentUser = firebase.auth().currentUser;
-    let updatedUser = null;
     firestore
       .collection("users")
       .doc(currentUser.uid)
@@ -218,7 +215,6 @@ export const updateUser = (user) => {
         { merge: true }
       )
       .then((response) => {
-        updatedUser = response;
         if (currentUser.email !== user.email) {
           return currentUser
             .updateEmail(user.email)

@@ -10,7 +10,7 @@ import TaskDetails from "./components/tasks/TaskDetails";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import CreateTask from "./components/tasks/CreateTask";
-import GuardedRoute from "./route-guard/GuardedRoute";
+// import GuardedRoute from "./route-guard/GuardedRoute";
 import ChatRoom from "./components/chat-room/ChatRoom";
 import UserProfile from "./components/profile/UserProfile";
 

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { updateUser, getCurrentUser } from "../../actions";
 import ImageUpload from "../image-upload/ImageUpload";
-import M from "materialize-css";
 
 class UserProfile extends Component {
   state = {
@@ -48,7 +47,7 @@ class UserProfile extends Component {
 
   render() {
     console.log(this.state);
-    const { profile, auth, changeError, user } = this.props;
+    const { profile, auth, changeError } = this.props;
     if (this.props.match.params.id !== auth.uid) {
       //nije ulogovan user nego gleda profil ili je pogodjen slucajno link profila tj uid ne dati da se menjaju podaci
     }
