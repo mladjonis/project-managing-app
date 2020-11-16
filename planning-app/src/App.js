@@ -13,6 +13,7 @@ import CreateTask from "./components/tasks/CreateTask";
 // import GuardedRoute from "./route-guard/GuardedRoute";
 import ChatRoom from "./components/chat-room/ChatRoom";
 import UserProfile from "./components/profile/UserProfile";
+import NetworkDetector from "./NetworkDetector";
 
 function App() {
   useEffect(() => {
@@ -37,5 +38,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
+export default NetworkDetector(App);
+// export default App;

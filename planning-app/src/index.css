@@ -191,3 +191,17 @@ p {
   border-bottom: 1px solid red;
   box-shadow: 0 1px 0 0 red;
 }
+
+.internet-error {
+  height: 60px;
+  background: #ff8100;
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.internet-error p {
+  font-size: 25px;
+  line-height: 60px;
+  color: #fff;
+  margin: 0;
+}
