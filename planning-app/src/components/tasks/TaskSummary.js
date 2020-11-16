@@ -11,7 +11,7 @@ const TaskSummary = ({ task }) => {
           {task.authorLastName}
         </p>
         <p className="note-date grey-text">
-          {moment(task.createdAt.toDate()).fromNow()}
+          {moment(task.createdAt.toDate()).toLocaleString()}
         </p>
       </div>
     </div>

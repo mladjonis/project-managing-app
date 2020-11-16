@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import DateFilter from "./DateFilter";
 import SearchBar from "./SearchBar";
 import TaskSummary from "./TaskSummary";
+import moment from "moment";
 
 class TaskList extends React.Component {
   state = {
     term: [],
+    filtered: [],
   };
 
   onSearchSubmit = (t) => {
@@ -17,6 +19,14 @@ class TaskList extends React.Component {
         term: [...this.filterTasks(condition)],
       });
     }
+  };
+
+  dateFilter = (startDate, endDate) => {
+    console.log(startDate, endDate);
+    const arr = this.state.filtered.filter((task) => {
+      return moment(task.createdAt.toDate()).isBetween(startDate, endDate);
+    });
+    console.log(arr);
   };
   filterTasks = (condition) => {
     let arr = [];
@@ -37,9 +47,9 @@ class TaskList extends React.Component {
     return (
       <React.Fragment>
         <SearchBar onSubmit={this.onSearchSubmit} />
-        <DateFilter />
+        <DateFilter dateFilter={this.dateFilter} />
         <div className="section">
-          {!this.state.term.length
+          {!this.state.term.length && !this.state.filtered.length
             ? tasks &&
               tasks.map((task) => {
                 return (
@@ -48,7 +58,15 @@ class TaskList extends React.Component {
                   </Link>
                 );
               })
-            : this.state.term.map((task) => {
+            : this.state.term.length
+            ? this.state.term.map((task) => {
+                return (
+                  <Link key={task.id} to={`/task/${task.id}`}>
+                    <TaskSummary task={task} />
+                  </Link>
+                );
+              })
+            : this.state.filtered.map((task) => {
                 return (
                   <Link key={task.id} to={`/task/${task.id}`}>
                     <TaskSummary task={task} />
