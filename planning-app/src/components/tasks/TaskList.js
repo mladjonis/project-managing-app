@@ -22,11 +22,12 @@ class TaskList extends React.Component {
   };
 
   dateFilter = (startDate, endDate) => {
-    console.log(startDate, endDate);
-    const arr = this.state.filtered.filter((task) => {
+    const arr = this.props.tasks.filter((task) => {
       return moment(task.createdAt.toDate()).isBetween(startDate, endDate);
     });
-    console.log(arr);
+    this.setState({
+      filtered: [...arr],
+    });
   };
   filterTasks = (condition) => {
     let arr = [];
@@ -43,6 +44,7 @@ class TaskList extends React.Component {
   };
   render() {
     const { tasks } = this.props;
+    console.log(this.state);
 
     return (
       <React.Fragment>
