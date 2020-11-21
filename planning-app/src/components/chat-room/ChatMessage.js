@@ -3,6 +3,7 @@ import moment from "moment";
 
 const ChatMessage = (props) => {
   const { text, uid, photoURL, createdAt } = props.message;
+  const { imageFullURL } = props.profile;
   const sentOrReceivedClass = uid === props.uid ? "sent" : "received";
   return (
     <div
@@ -12,7 +13,7 @@ const ChatMessage = (props) => {
         <div className="row valign-wrapper">
           <div className="col s2">
             <img
-              src={photoURL}
+              src={imageFullURL}
               alt={photoURL}
               className="circle responsive-img chat-message-image"
             />

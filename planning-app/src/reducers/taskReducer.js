@@ -13,7 +13,7 @@ const taskReducer = (state = initState, action) => {
       //console.log("ADD_TASK_ERROR", action.payload);
       return state;
     case GET_NEXT_TASKS:
-      console.log(action.payload);
+      // console.log(action.payload);
       return { ...state, tasks: action.payload };
     default:
       return state;
