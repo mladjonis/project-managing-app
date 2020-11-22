@@ -4,6 +4,7 @@ import DateFilter from "./DateFilter";
 import SearchBar from "./SearchBar";
 import TaskSummary from "./TaskSummary";
 import moment from "moment";
+import _, { isUndefined } from "lodash";
 
 //popraviti ponasanje komponente kada se ucitaju novi taskovi a vec je selektovan datum
 class TaskList extends React.Component {
@@ -13,46 +14,26 @@ class TaskList extends React.Component {
     initProps: [],
   };
 
-  // shouldComponentUpdate(prevProps, state) {
-  //   console.log(prevProps, state);
-  //   return (
-  //     prevProps.tasks[prevProps.tasks.length - 1].id !== state.term[0].id
-  //   );
-  // }
-  componentDidMount() {
-    console.log(this.props.tasks);
-    if (this.props.tasks) {
-      this.setState({
-        ...this.state,
-        initProps: [...this.props.tasks],
-      });
-    }
-  }
-  componentDidUpdate(prevProps, prevState) {
-    // this.setState({
-    //   term: [...this.state.term, ...this.props.tasks],
-    // });
-    console.log(prevProps);
-    console.log(prevState);
-    if (
-      prevState.initProps.length &&
-      prevProps.tasks.length &&
-      prevProps.tasks[prevProps.tasks.length - 1].id !==
-        prevState.initProps[0].id
-    ) {
+  componentDidUpdate(prevProps) {
+    if (!this.state.initProps.length) {
       this.setState({
         ...this.state,
         initProps: [...this.state.initProps, ...this.props.tasks],
       });
-      console.log("updated");
-      console.log(this.state);
     }
-    // if (
-    //   this.props.tasks[this.props.tasks.lenght - 1].id === prevProps.tasks[0].id
-    // ) {
-    //   console.log("updejtuj komponentu");
-    // }
-    // console.log({ ...this.state.term, ...this.props.tasks });
+
+    if (
+      !isUndefined(prevProps.tasks) &&
+      this.state.initProps.length !== prevProps.tasks.length
+    ) {
+      if (!_.isEqual(this.state.initProps, prevProps.tasks)) {
+        this.setState({
+          ...this.state,
+          initProps: [...this.props.tasks],
+        });
+        console.log(this.state);
+      }
+    }
   }
 
   onSearchSubmit = (t) => {
@@ -61,7 +42,7 @@ class TaskList extends React.Component {
     if (this.props.tasks) {
       this.setState({
         ...this.state,
-        term: [...this.filterTasks(condition)],
+        initProps: [...this.filterTasks(condition)],
       });
     }
   };
@@ -72,7 +53,7 @@ class TaskList extends React.Component {
     });
     this.setState({
       ...this.state,
-      filtered: [...arr],
+      initProps: [...arr],
     });
   };
   filterTasks = (condition) => {
@@ -89,14 +70,21 @@ class TaskList extends React.Component {
     return arr;
   };
   render() {
-    const { tasks } = this.props;
+    // const { tasks } = this.props;
 
     return (
       <React.Fragment>
         <SearchBar onSubmit={this.onSearchSubmit} />
         <DateFilter dateFilter={this.dateFilter} />
         <div className="section">
-          {!this.state.term.length && !this.state.filtered.length
+          {this.state.initProps.map((task) => {
+            return (
+              <Link key={task.id} to={`/task/${task.id}`}>
+                <TaskSummary task={task} />
+              </Link>
+            );
+          })}
+          {/* {!this.state.term.length && !this.state.filtered.length
             ? tasks &&
               tasks.map((task) => {
                 return (
@@ -119,7 +107,7 @@ class TaskList extends React.Component {
                     <TaskSummary task={task} />
                   </Link>
                 );
-              })}
+              })} */}
         </div>
       </React.Fragment>
     );
